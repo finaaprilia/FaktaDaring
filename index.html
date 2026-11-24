@@ -6,21 +6,23 @@
   <title>Cek Fakta Daring — Kost Dream House</title>
   <style>
     :root {
-      --bg: #f6f8fb;
+      color-scheme: light;
+      --bg: #f6f1e7;
       --surface: #ffffff;
-      --surface-soft: #eef3f9;
-      --text: #16202a;
-      --muted: #556575;
-      --accent: #0f766e;
-      --accent-dark: #115e59;
-      --accent-soft: #ccfbf1;
-      --warn-bg: #fef3c7;
-      --warn-text: #92400e;
-      --ok-bg: #dcfce7;
-      --ok-text: #166534;
-      --border: #dde5ee;
-      --radius: 16px;
-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --surface-soft: #f8f2e7;
+      --text: #25352e;
+      --muted: #5d6b63;
+      --accent: #b84d36;
+      --accent-dark: #873722;
+      --accent-soft: #f7ded4;
+      --green: #2e684d;
+      --warn-bg: #fff0cb;
+      --warn-text: #744710;
+      --ok-bg: #e0efe2;
+      --ok-text: #24543a;
+      --border: #e8dfd1;
+      --radius: 20px;
+      --shadow: 0 14px 36px rgba(63, 47, 29, 0.08);
     }
 
     * {
@@ -29,124 +31,166 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: "Segoe UI", Roboto, Inter, Arial, sans-serif;
-      background: linear-gradient(180deg, #e6f4f1 0%, var(--bg) 260px);
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 20px 16px 48px;
+      padding: clamp(16px, 4vw, 40px) 16px 48px;
     }
 
     .container {
-      max-width: 860px;
+      width: min(100%, 920px);
       margin: 0 auto;
     }
 
     .hero {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      background: #294f3d;
+      color: #fffaf1;
       border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
+      padding: clamp(24px, 5vw, 44px);
+      margin-bottom: 22px;
+      box-shadow: 0 18px 40px rgba(36, 67, 50, 0.18);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      right: -74px;
+      bottom: -132px;
+      border: 34px solid rgba(238, 183, 81, 0.28);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
     .badge {
       display: inline-block;
-      background: var(--accent-soft);
-      color: var(--accent-dark);
+      background: #f2c56f;
+      color: #3a321f;
       font-weight: 700;
       font-size: 0.78rem;
-      padding: 5px 12px;
+      padding: 6px 12px;
       border-radius: 999px;
       margin-bottom: 12px;
       letter-spacing: 0.2px;
     }
 
     h1 {
-      font-size: clamp(1.45rem, 3vw, 2rem);
+      max-width: 760px;
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
       line-height: 1.25;
       margin-bottom: 10px;
-      color: #0f172a;
+      letter-spacing: -0.035em;
     }
 
     .subtitle {
-      color: var(--muted);
-      font-size: 0.98rem;
+      max-width: 720px;
+      color: #e0e9df;
+      font-size: clamp(0.94rem, 2vw, 1.05rem);
       margin-bottom: 16px;
     }
 
     .meta-strip {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       font-size: 0.84rem;
-      color: var(--muted);
+      color: #fffaf1;
     }
 
     .meta-pill {
-      background: var(--surface-soft);
+      background: rgba(255, 250, 241, 0.12);
+      border: 1px solid rgba(255, 250, 241, 0.24);
       padding: 6px 12px;
-      border-radius: 10px;
+      border-radius: 999px;
     }
 
     .card {
+      position: relative;
+      overflow: hidden;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 22px;
+      padding: clamp(18px, 3.5vw, 30px);
       box-shadow: var(--shadow);
-      margin-bottom: 20px;
+      margin-bottom: 22px;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: var(--accent);
     }
 
     .card h2 {
-      font-size: 1.2rem;
+      font-size: clamp(1.15rem, 2.5vw, 1.38rem);
+      line-height: 1.35;
       margin-bottom: 6px;
-      color: #0f172a;
+      color: #263b30;
     }
 
     .card-desc {
       color: var(--muted);
       font-size: 0.92rem;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .checklist {
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     .check-item {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: #fcfdff;
+      gap: 14px;
+      padding: 15px;
+      border: 1px solid #e9e4da;
+      border-radius: 14px;
+      background: #fffdf8;
       cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.18s, background 0.18s, transform 0.18s;
     }
 
-    .check-item:hover {
+    .check-item:hover,
+    .check-item:focus-within {
       border-color: var(--accent);
-      background: #f8fffe;
+      background: #fff8f2;
+      transform: translateY(-1px);
+    }
+
+    .check-item:has(input:checked) {
+      border-color: #9ab99f;
+      background: #f2f8f1;
     }
 
     .check-item input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
+      width: 21px;
+      height: 21px;
       margin-top: 2px;
-      accent-color: var(--accent);
+      accent-color: var(--green);
       flex-shrink: 0;
       cursor: pointer;
     }
 
     .check-title {
       font-weight: 700;
-      font-size: 0.96rem;
+      font-size: 0.97rem;
       display: block;
       margin-bottom: 2px;
+      color: #293a31;
     }
 
     .check-sub {
@@ -155,10 +199,40 @@
       display: block;
     }
 
+    .progress-wrap {
+      margin-top: 18px;
+    }
+
+    .progress-label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 9px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #eee8dc;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--green);
+      transition: width 0.25s ease;
+    }
+
     .status-box {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 12px;
+      margin-top: 12px;
+      padding: 13px 15px;
+      border-radius: 13px;
       font-size: 0.92rem;
       font-weight: 600;
       background: var(--warn-bg);
@@ -168,42 +242,60 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
+      border: 1px solid #f1dfb6;
     }
 
     .status-box.done {
       background: var(--ok-bg);
       color: var(--ok-text);
+      border-color: #c4dec9;
     }
 
     .btn-reset {
       border: none;
-      background: var(--surface);
+      background: #fffaf0;
       color: var(--text);
-      padding: 7px 12px;
-      border-radius: 8px;
+      padding: 8px 14px;
+      border-radius: 9px;
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       border: 1px solid var(--border);
+      transition: background 0.18s, border-color 0.18s;
+    }
+
+    .btn-reset:hover {
+      background: #fff;
+      border-color: var(--accent);
     }
 
     .tech-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+      gap: 12px;
     }
 
     .tech-box {
-      border: 1px solid var(--border);
-      background: var(--surface-soft);
-      border-radius: 12px;
-      padding: 16px;
+      border: 1px solid #e8dfd1;
+      background: #f8f2e7;
+      border-radius: 14px;
+      padding: 17px;
+    }
+
+    .tech-box:nth-child(2) {
+      background: #f2f3e5;
+      border-color: #e1e4ce;
+    }
+
+    .tech-box:nth-child(3) {
+      background: #f9eae2;
+      border-color: #efd6c9;
     }
 
     .tech-box h3 {
       font-size: 1rem;
       margin-bottom: 6px;
-      color: var(--accent-dark);
+      color: var(--green);
     }
 
     .tech-box p {
@@ -211,22 +303,31 @@
       color: var(--text);
     }
 
+    code {
+      padding: 1px 5px;
+      border-radius: 5px;
+      background: #fff;
+      color: var(--accent-dark);
+    }
+
     .case-tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
       margin-bottom: 14px;
     }
 
     .tab-btn {
-      padding: 8px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface-soft);
+      min-height: 44px;
+      padding: 9px 12px;
+      border-radius: 11px;
+      border: 1px solid #e6dfd3;
+      background: #f8f2e7;
       color: var(--text);
       font-size: 0.86rem;
       font-weight: 600;
       cursor: pointer;
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
     }
 
     .tab-btn.active {
@@ -235,11 +336,16 @@
       border-color: var(--accent);
     }
 
+    .tab-btn:not(.active):hover {
+      background: #f7ded4;
+      border-color: #d7a292;
+    }
+
     .case-panel {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      background: #fafbfd;
+      border: 1px solid #e8dfd1;
+      border-radius: 14px;
+      padding: clamp(15px, 3vw, 20px);
+      background: #fffdf8;
       font-size: 0.92rem;
     }
 
@@ -247,16 +353,64 @@
       margin-top: 8px;
     }
 
+    :focus-visible {
+      outline: 3px solid #d99045;
+      outline-offset: 3px;
+    }
+
     footer {
       text-align: center;
       font-size: 0.84rem;
       color: var(--muted);
-      margin-top: 24px;
+      margin-top: 28px;
     }
 
-    @media (max-width: 600px) {
-      .hero, .card {
-        padding: 18px;
+    @media (max-width: 640px) {
+      body {
+        padding: 14px 12px 32px;
+      }
+
+      .hero {
+        border-radius: 17px;
+      }
+
+      .meta-strip {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .meta-pill {
+        max-width: 100%;
+        border-radius: 10px;
+      }
+
+      .card {
+        margin-bottom: 14px;
+        border-radius: 16px;
+      }
+
+      .check-item {
+        gap: 11px;
+        padding: 13px 12px;
+      }
+
+      .case-tabs {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .tab-btn {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -324,6 +478,21 @@
         </label>
       </div>
 
+      <div class="progress-wrap">
+        <span class="progress-label">Progres verifikasi</span>
+        <div
+          class="progress-track"
+          id="progressTrack"
+          role="progressbar"
+          aria-label="Progres verifikasi"
+          aria-valuemin="0"
+          aria-valuemax="5"
+          aria-valuenow="0"
+        >
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
       <div class="status-box" id="statusBox">
         <span id="statusText">0 dari 5 langkah tercentang — Lanjutkan verifikasi sebelum membagikan.</span>
         <button type="button" class="btn-reset" id="resetBtn">Reset</button>
@@ -386,10 +555,14 @@
     const statusBox = document.getElementById("statusBox");
     const statusText = document.getElementById("statusText");
     const resetBtn = document.getElementById("resetBtn");
+    const progressTrack = document.getElementById("progressTrack");
+    const progressFill = document.getElementById("progressFill");
 
     function updateStatus() {
       const total = checks.length;
       const checked = Array.from(checks).filter((c) => c.checked).length;
+      progressTrack.setAttribute("aria-valuenow", checked);
+      progressFill.style.width = `${(checked / total) * 100}%`;
 
       if (checked === total) {
         statusBox.classList.add("done");
