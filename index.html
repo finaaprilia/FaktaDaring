@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cek Fakta Daring — Kost Dream House</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --surface-soft: #eef3f9;
+      --text: #16202a;
+      --muted: #556575;
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+      --accent-soft: #ccfbf1;
+      --warn-bg: #fef3c7;
+      --warn-text: #92400e;
+      --ok-bg: #dcfce7;
+      --ok-text: #166534;
+      --border: #dde5ee;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Roboto, Inter, Arial, sans-serif;
+      background: linear-gradient(180deg, #e6f4f1 0%, var(--bg) 260px);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px 16px 48px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      letter-spacing: 0.2px;
+    }
+
+    h1 {
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      line-height: 1.25;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin-bottom: 16px;
+    }
+
+    .meta-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .meta-pill {
+      background: var(--surface-soft);
+      padding: 6px 12px;
+      border-radius: 10px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+      color: #0f172a;
+    }
+
+    .card-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 12px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fcfdff;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .check-item:hover {
+      border-color: var(--accent);
+      background: #f8fffe;
+    }
+
+    .check-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--accent);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .check-title {
+      font-weight: 700;
+      font-size: 0.96rem;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .check-sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      display: block;
+    }
+
+    .status-box {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      background: var(--warn-bg);
+      color: var(--warn-text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .status-box.done {
+      background: var(--ok-bg);
+      color: var(--ok-text);
+    }
+
+    .btn-reset {
+      border: none;
+      background: var(--surface);
+      color: var(--text);
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .tech-box {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .tech-box h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: var(--accent-dark);
+    }
+
+    .tech-box p {
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .case-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .tab-btn {
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--text);
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    .case-panel {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fafbfd;
+      font-size: 0.92rem;
+    }
+
+    .case-panel p + p {
+      margin-top: 8px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .hero, .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <span class="badge">Sila ke-3 • Literasi Digital &amp; Persatuan</span>
+      <h1>Panduan Cek Fakta &amp; Verifikasi Informasi Daring</h1>
+      <p class="subtitle">
+        Media bantu interaktif untuk mengenali hoaks, memeriksa tautan dan gambar mencurigakan,
+        serta menjaga ruang digital tetap sehat dan rukun bagi penghuni Kost Dream House.
+      </p>
+      <div class="meta-strip">
+        <span class="meta-pill">Lokasi: Kost Dream House, Tembalang</span>
+        <span class="meta-pill">Kelompok 8 • Teknik Komputer UNDIP</span>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Checklist 5 Langkah Sebelum Membagikan Informasi</h2>
+      <p class="card-desc">
+        Centang setiap langkah saat menguji sebuah berita atau pesan berantai di HP maupun laptop.
+      </p>
+
+      <div class="checklist" id="checklist">
+        <label class="check-item">
+          <input type="checkbox" class="step-check" />
+          <span>
+            <span class="check-title">1. Periksa Sumber &amp; Keaslian Alamat (URL)</span>
+            <span class="check-sub">Pastikan nama domain resmi, tidak typo/menyerupai situs berita asli, dan bukan tautan pendek mencurigakan.</span>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" class="step-check" />
+          <span>
+            <span class="check-title">2. Cek Waktu Kejadian &amp; Konteks</span>
+            <span class="check-sub">Periksa tanggal terbit. Banyak hoaks memakai peristiwa bertahun-tahun lalu seolah baru terjadi hari ini.</span>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" class="step-check" />
+          <span>
+            <span class="check-title">3. Telusuri Asal Gambar / Video</span>
+            <span class="check-sub">Gunakan pencarian gambar balik (reverse image search) untuk memastikan foto tidak dicomot dari tempat/kasus lain.</span>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" class="step-check" />
+          <span>
+            <span class="check-title">4. Bandingkan dengan Media Kredibel</span>
+            <span class="check-sub">Cari topik yang sama di kanal berita terpercaya atau pengumuman resmi agar tidak terjebak satu sudut pandang provokatif.</span>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" class="step-check" />
+          <span>
+            <span class="check-title">5. Evaluasi Emosi &amp; Potensi Polarisasi</span>
+            <span class="check-sub">Waspadai judul yang memancing marah, takut, atau kebencian antarkelompok. Tahan tombol <em>forward</em> jika belum pasti.</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="status-box" id="statusBox">
+        <span id="statusText">0 dari 5 langkah tercentang — Lanjutkan verifikasi sebelum membagikan.</span>
+        <button type="button" class="btn-reset" id="resetBtn">Reset</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Pendekatan Teknis Ringkas (Teknik Komputer)</h2>
+      <p class="card-desc">
+        Langkah teknis sederhana yang bisa langsung dipraktikkan peserta di perangkat masing-masing.
+      </p>
+      <div class="tech-grid">
+        <div class="tech-box">
+          <h3>Anatomi URL &amp; Domain</h3>
+          <p>
+            Perhatikan bagian utama domain sebelum tanda garis miring pertama (<code>/</code>).
+            Waspadai domain gratis acak atau pengecoh huruf.
+          </p>
+        </div>
+        <div class="tech-box">
+          <h3>Penelusuran Visual</h3>
+          <p>
+            Manfaatkan fitur <em>Search image with Google Lens</em> di browser HP/PC untuk melacak
+            kemunculan awal sebuah foto.
+          </p>
+        </div>
+        <div class="tech-box">
+          <h3>Kebersihan Akun &amp; Tautan</h3>
+          <p>
+            Hindari memasukkan data login atau kode OTP dari tautan pesan berantai yang tidak jelas
+            asal-usulnya.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Latihan Diskusi Singkat</h2>
+      <p class="card-desc">Pilih contoh kasus untuk didiskusikan bersama penghuni kost saat sesi berlangsung.</p>
+
+      <div class="case-tabs">
+        <button type="button" class="tab-btn active" data-case="1">Kasus 1: Foto Lama</button>
+        <button type="button" class="tab-btn" data-case="2">Kasus 2: Tautan Hadiah/Bantuan</button>
+        <button type="button" class="tab-btn" data-case="3">Kasus 3: Narasi Pemecah Belah</button>
+      </div>
+
+      <div class="case-panel" id="casePanel">
+        <p><strong>Pesan:</strong> Foto kerumunan/kejadian viral dikirim ke grup dengan klaim "baru saja terjadi pagi ini di sekitar kita".</p>
+        <p><strong>Cara Cek:</strong> Lakukan pencarian gambar balik dan cek tanggal unggahan paling awal. Jika foto sudah muncul bertahun-tahun lalu di lokasi berbeda, maka konteksnya menyesatkan.</p>
+      </div>
+    </section>
+
+    <footer>
+      Kelompok 8 • Teknik Komputer UNDIP — Kost Dream House, Tembalang
+    </footer>
+  </div>
+
+  <script>
+    const checks = document.querySelectorAll(".step-check");
+    const statusBox = document.getElementById("statusBox");
+    const statusText = document.getElementById("statusText");
+    const resetBtn = document.getElementById("resetBtn");
+
+    function updateStatus() {
+      const total = checks.length;
+      const checked = Array.from(checks).filter((c) => c.checked).length;
+
+      if (checked === total) {
+        statusBox.classList.add("done");
+        statusText.textContent = `${checked} dari ${total} langkah selesai — Informasi sudah melewati tahap cek dasar.`;
+      } else {
+        statusBox.classList.remove("done");
+        statusText.textContent = `${checked} dari ${total} langkah tercentang — Lanjutkan verifikasi sebelum membagikan.`;
+      }
+    }
+
+    checks.forEach((c) => c.addEventListener("change", updateStatus));
+    resetBtn.addEventListener("click", () => {
+      checks.forEach((c) => (c.checked = false));
+      updateStatus();
+    });
+
+    const cases = {
+      1: {
+        pesan: "Foto kerumunan/kejadian viral dikirim ke grup dengan klaim \"baru saja terjadi pagi ini di sekitar kita\".",
+        cek: "Lakukan pencarian gambar balik dan cek tanggal unggahan paling awal. Jika foto sudah muncul bertahun-tahun lalu di lokasi berbeda, maka konteksnya menyesatkan."
+      },
+      2: {
+        pesan: "Pesan berantai berisi tautan klaim bantuan/hadiah yang meminta bagikan ke banyak grup dan isi data pribadi.",
+        cek: "Periksa domain tautan secara teliti dan pastikan informasi berasal dari kanal resmi. Jangan pernah mengisi sandi, PIN, atau data sensitif pada form tidak resmi."
+      },
+      3: {
+        pesan: "Potongan video/kutipan singkat tanpa konteks lengkap yang menyudutkan kelompok tertentu agar memicu perdebatan panas.",
+        cek: "Cari konteks utuh dari sumber berita terpercaya dan tahan diri untuk ikut menyebarkan narasi yang memperlebar polarisasi."
+      }
+    };
+
+    const tabs = document.querySelectorAll(".tab-btn");
+    const panel = document.getElementById("casePanel");
+
+    tabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        tabs.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const data = cases[btn.dataset.case];
+        panel.innerHTML = `<p><strong>Pesan:</strong> ${data.pesan}</p><p><strong>Cara Cek:</strong> ${data.cek}</p>`;
+      });
+    });
+  </script>
+</body>
+</html>
